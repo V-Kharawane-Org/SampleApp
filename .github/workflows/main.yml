@@ -1,0 +1,27 @@
+# main.yml
+name: Python CI Build and Test
+
+on:
+  # The pipeline runs whenever code is pushed to the main or master branches
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python environment
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Run Sample Python Script and Test
+      run: |
+        # IMPORTANT: We use the file name app.py.txt that you successfully pushed.
+        python app.py.txt
+        echo "CI/CD execution complete."
